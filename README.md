@@ -24,6 +24,13 @@ pip install -r requirements-cuda-11.3.txt
 pip install -r requirements-cuda-11.6.txt
 ```
 
+### 3) Install maracas
+```shell
+git clone https://github.com/jfsantos/maracas /home/${USER}/maracas
+cd /home/${USER}/maracas
+pip install .
+cd -
+```
 
 ## Usage: Training
 
