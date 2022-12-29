@@ -15,7 +15,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from common import get_mask_from_lengths, LinearNorm
+from radtts.common import get_mask_from_lengths, LinearNorm
 
 
 class PositionalEmbedding(nn.Module):

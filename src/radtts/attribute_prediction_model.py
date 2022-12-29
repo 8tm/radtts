@@ -20,11 +20,11 @@
 # DEALINGS IN THE SOFTWARE.
 import torch
 from torch import nn
-from common import ConvNorm, Invertible1x1Conv
-from common import AffineTransformationLayer, SplineTransformationLayer
-from common import ConvLSTMLinear
-from transformer import FFTransformer
-from autoregressive_flow import AR_Step, AR_Back_Step
+from radtts.common import ConvNorm, Invertible1x1Conv
+from radtts.common import AffineTransformationLayer, SplineTransformationLayer
+from radtts.common import ConvLSTMLinear
+from radtts.transformer import FFTransformer
+from radtts.autoregressive_flow import AR_Step, AR_Back_Step
 
 
 def get_attribute_prediction_model(config):

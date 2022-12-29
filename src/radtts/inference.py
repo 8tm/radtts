@@ -29,13 +29,13 @@ import torch
 from torch.cuda import amp
 from scipy.io.wavfile import write
 
-from radtts import RADTTS
-from data import Data
-from common import update_params
+from radtts.radtts import RADTTS
+from radtts.data import Data
+from radtts.common import update_params
 
-from hifigan_models import Generator
-from hifigan_env import AttrDict
-from hifigan_denoiser import Denoiser
+from radtts.hifigan_models import Generator
+from radtts.hifigan_env import AttrDict
+from radtts.hifigan_denoiser import Denoiser
 
 
 def lines_to_list(filename):
@@ -76,6 +76,7 @@ def load_vocoder(vocoder_path, config_path, to_cuda=True):
     denoiser.eval()
 
     return vocoder, denoiser
+
 
 def infer(radtts_path, vocoder_path, vocoder_config_path, text_path, speaker,
           speaker_text, speaker_attributes, sigma, sigma_tkndur, sigma_f0,
@@ -156,7 +157,7 @@ def infer(radtts_path, vocoder_path, vocoder_config_path, text_path, speaker,
                 plt.close('all')
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config', type=str, help='JSON file config')
     parser.add_argument('-k', '--config_vocoder', type=str, help='vocoder JSON file config')
@@ -204,3 +205,7 @@ if __name__ == "__main__":
           args.sigma_energy, args.f0_mean, args.f0_std, args.energy_mean,
           args.energy_std, args.token_dur_scaling, args.denoising_strength,
           args.n_takes, args.output_dir, args.use_amp, args.plot, args.seed)
+
+
+if __name__ == "__main__":
+    main()

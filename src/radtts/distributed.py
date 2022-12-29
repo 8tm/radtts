@@ -45,6 +45,7 @@ def reduce_tensor(tensor, num_gpus, reduce_dst=None):
     rt /= num_gpus
     return rt
 
+
 def init_distributed(rank, num_gpus, dist_backend, dist_url):
     assert torch.cuda.is_available(), "Distributed mode requires CUDA."
 
@@ -63,6 +64,7 @@ def init_distributed(rank, num_gpus, dist_backend, dist_url):
                                          rank=rank,
                                          init_method=init_method)
 
+
 def _flatten_dense_tensors(tensors):
     """Flatten dense tensors into a contiguous 1D buffer. Assume tensors are of
     same dense type.
@@ -78,6 +80,7 @@ def _flatten_dense_tensors(tensors):
         return tensors[0].contiguous().view(-1)
     flat = torch.cat([t.contiguous().view(-1) for t in tensors], dim=0)
     return flat
+
 
 def _unflatten_dense_tensors(flat, tensors):
     """View a flat buffer using the sizes of tensors. Assume that tensors are of
@@ -97,6 +100,7 @@ def _unflatten_dense_tensors(flat, tensors):
         outputs.append(flat.narrow(0, offset, numel).view_as(tensor))
         offset += numel
     return tuple(outputs)
+
 
 def apply_gradient_allreduce(module):
     """

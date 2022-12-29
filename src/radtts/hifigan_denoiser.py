@@ -19,7 +19,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 import torch
-from audio_processing import STFT
+from radtts.audio_processing import STFT
 
 
 class Denoiser(torch.nn.Module):

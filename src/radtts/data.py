@@ -47,11 +47,11 @@ import pickle as pkl
 import torch
 import torch.utils.data
 from scipy.io.wavfile import read
-from audio_processing import TacotronSTFT
-from tts_text_processing.text_processing import TextProcessing
+from radtts.audio_processing import TacotronSTFT
+from radtts.tts_text_processing.text_processing import TextProcessing
 from scipy.stats import betabinom
 from librosa import pyin
-from common import update_params
+from radtts.common import update_params
 from scipy.ndimage import distance_transform_edt as distance_transform
 
 
@@ -76,6 +76,7 @@ def load_wav_to_torch(full_path):
 
 
 class Data(torch.utils.data.Dataset):
+
     def __init__(self, datasets, filter_length, hop_length, win_length,
                  sampling_rate, n_mel_channels, mel_fmin, mel_fmax, f0_min,
                  f0_max, max_wav_value, use_f0, use_energy_avg, use_log_f0,
@@ -498,7 +499,7 @@ class DataCollate():
 # Takes directory of clean audio and makes directory of spectrograms
 # Useful for making test sets
 # ===================================================================
-if __name__ == "__main__":
+def main():
     # Get defaults so it can work with no Sacred
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config', type=str,
@@ -532,3 +533,7 @@ if __name__ == "__main__":
         for i, batch in enumerate(dataset):
             out = batch
             print("{}/{}".format(i, len(dataset)))
+
+
+if __name__ == "__main__":
+    main()

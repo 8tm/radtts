@@ -2,10 +2,10 @@
 
 import re
 import numpy as np
-from . import cleaners
-from .cleaners import Cleaner
-from .symbols import get_symbols
-from .grapheme_dictionary import Grapheme2PhonemeDictionary
+from radtts.tts_text_processing import cleaners
+from radtts.tts_text_processing.cleaners import Cleaner
+from radtts.tts_text_processing.symbols import get_symbols
+from radtts.tts_text_processing.grapheme_dictionary import Grapheme2PhonemeDictionary
 
 
 #########

@@ -21,6 +21,7 @@ _roman_re = re.compile(r'\b(?=[MDCLXVI]+\b)M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3}
 _multiply_re = re.compile(r'(\b[0-9]+)(x)([0-9]+)')
 _number_re = re.compile(r"[0-9]+'s|[0-9]+s|[0-9]+")
 
+
 def _remove_commas(m):
     return m.group(1).replace(',', '')
 

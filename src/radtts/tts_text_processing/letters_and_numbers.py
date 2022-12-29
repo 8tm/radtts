@@ -25,8 +25,6 @@ _dimension_key = {'m': 'meter',
                   'inch': 'inch'}
 
 
-
-
 def _expand_letters_and_numbers(m):
     text = re.split(r'(\d+)', m.group(0))
 

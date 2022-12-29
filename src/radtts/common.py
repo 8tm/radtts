@@ -55,10 +55,10 @@ from torch.cuda import amp
 from torch.cuda.amp import autocast as autocast
 import numpy as np
 import ast
-from splines import (piecewise_linear_transform,
+from radtts.splines import (piecewise_linear_transform,
                      piecewise_linear_inverse_transform,
                      unbounded_piecewise_quadratic_transform)
-from partialconv1d import PartialConv1d as pconv1d
+from radtts.partialconv1d import PartialConv1d as pconv1d
 from typing import Tuple
 
 

@@ -20,12 +20,12 @@
 # DEALINGS IN THE SOFTWARE.
 import torch
 from torch import nn
-from common import Encoder, LengthRegulator, ConvAttention
-from common import Invertible1x1ConvLUS, Invertible1x1Conv
-from common import AffineTransformationLayer, LinearNorm, ExponentialClass
-from common import get_mask_from_lengths
-from attribute_prediction_model import get_attribute_prediction_model
-from alignment import mas_width1 as mas
+from radtts.common import Encoder, LengthRegulator, ConvAttention
+from radtts.common import Invertible1x1ConvLUS, Invertible1x1Conv
+from radtts.common import AffineTransformationLayer, LinearNorm, ExponentialClass
+from radtts.common import get_mask_from_lengths
+from radtts.attribute_prediction_model import get_attribute_prediction_model
+from radtts.alignment import mas_width1 as mas
 
 
 class FlowStep(nn.Module):
@@ -46,7 +46,6 @@ class FlowStep(nn.Module):
 
     def enable_inverse_cache(self):
         self.invtbl_conv.cache_inverse=True
-
 
     def forward(self, z, context, inverse=False, seq_lens=None):
         if inverse:  # for inference z-> mel

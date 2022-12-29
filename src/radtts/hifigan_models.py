@@ -26,7 +26,7 @@ import torch.nn.functional as F
 import torch.nn as nn
 from torch.nn import Conv1d, ConvTranspose1d, AvgPool1d, Conv2d
 from torch.nn.utils import weight_norm, remove_weight_norm, spectral_norm
-from hifigan_utils import init_weights, get_padding
+from radtts.hifigan_utils import init_weights, get_padding
 
 LRELU_SLOPE = 0.1
 
@@ -82,6 +82,7 @@ class GaussianBlurAugmentation(nn.Module):
 
 class ResBlock1(torch.nn.Module):
     __constants__ = ['lrelu_slope']
+
     def __init__(self, h, channels, kernel_size=3, dilation=(1, 3, 5)):
         super(ResBlock1, self).__init__()
         self.h = h
@@ -124,6 +125,7 @@ class ResBlock1(torch.nn.Module):
 
 class ResBlock2(torch.nn.Module):
     __constants__ = ['lrelu_slope']
+
     def __init__(self, h, channels, kernel_size=3, dilation=(1, 3)):
         super(ResBlock2, self).__init__()
         self.h = h
@@ -150,6 +152,7 @@ class ResBlock2(torch.nn.Module):
 
 class Generator(torch.nn.Module):
     __constants__ = ['lrelu_slope', 'num_kernels', 'num_upsamples', 'p_blur']
+
     def __init__(self, h):
         super(Generator, self).__init__()
         self.num_kernels = len(h.resblock_kernel_sizes)
@@ -227,6 +230,7 @@ class Generator(torch.nn.Module):
 
 class DiscriminatorP(torch.nn.Module):
     __constants__ = ['LRELU_SLOPE']
+
     def __init__(self, period, kernel_size=5, stride=3, use_spectral_norm=False):
         super(DiscriminatorP, self).__init__()
         self.period = period
@@ -263,6 +267,7 @@ class DiscriminatorP(torch.nn.Module):
 
 
 class MultiPeriodDiscriminator(torch.nn.Module):
+
     def __init__(self):
         super(MultiPeriodDiscriminator, self).__init__()
         self.discriminators = nn.ModuleList([
@@ -291,6 +296,7 @@ class MultiPeriodDiscriminator(torch.nn.Module):
 
 class DiscriminatorS(torch.nn.Module):
     __constants__ = ['LRELU_SLOPE']
+
     def __init__(self, use_spectral_norm=False):
         super(DiscriminatorS, self).__init__()
         norm_f = weight_norm if use_spectral_norm == False else spectral_norm
@@ -319,6 +325,7 @@ class DiscriminatorS(torch.nn.Module):
 
 
 class MultiScaleDiscriminator(torch.nn.Module):
+
     def __init__(self):
         super(MultiScaleDiscriminator, self).__init__()
         self.discriminators = nn.ModuleList([
@@ -382,4 +389,3 @@ def generator_loss(disc_outputs):
         loss += l
 
     return loss, gen_losses
-

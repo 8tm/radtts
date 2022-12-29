@@ -28,6 +28,7 @@ def save_plot(fname, attn_map):
     plt.imshow(attn_map)
     plt.savefig(fname)
 
+
 @jit(nopython=True)
 def mas_width1(attn_map):
     """mas with hardcoded width=1"""
@@ -58,9 +59,14 @@ def mas_width1(attn_map):
     opt[0, curr_text_idx] = 1
     return opt
 
-if __name__ == '__main__':
+
+def main():
     attn_ = np.load(sys.argv[1])
     attn = attn_.squeeze()
     save_plot('orig.png', attn)
     binarized = mas(attn)
     save_plot('binarized.png', binarized)
+
+
+if __name__ == '__main__':
+    main()

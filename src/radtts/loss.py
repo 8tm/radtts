@@ -21,7 +21,7 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-from common import get_mask_from_lengths
+from radtts.common import get_mask_from_lengths
 
 
 def compute_flow_loss(z, log_det_W_list, log_s_list, n_elements, n_dims, mask,

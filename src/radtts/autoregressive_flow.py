@@ -43,7 +43,7 @@
 
 import torch
 from torch import nn
-from common import DenseLayer, SplineTransformationLayerAR
+from radtts.common import DenseLayer, SplineTransformationLayerAR
 
 
 class AR_Back_Step(torch.nn.Module):

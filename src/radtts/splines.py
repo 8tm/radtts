@@ -244,12 +244,14 @@ def unbounded_piecewise_quadratic_transform(x, w_tilde, v_tilde, upper=1,
         log_j = None
     return outputs, log_j
 
+
 def weighted_softmax(v, w):
     # to avoid NaN...
     v = v - torch.max(v, dim=-1, keepdim=True)[0]
     v = torch.exp(v) + 1e-8 # to avoid NaN...
     v_sum = torch.sum((v[..., :-1] + v[..., 1:]) / 2 * w, dim=-1, keepdim=True)
     return v / v_sum
+
 
 def piecewise_quadratic_transform(x, w_tilde, v_tilde, inverse=False):
     """Element-wise piecewise-quadratic transformation

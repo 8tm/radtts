@@ -31,14 +31,14 @@ from scipy.io.wavfile import write
 import torch
 from torch.cuda import amp
 
-from radtts import RADTTS
+from radtts.radtts import RADTTS
 from torch.utils.data import DataLoader
-from data import Data, DataCollate
-from train import update_params, parse_data_from_batch
+from radtts.data import Data, DataCollate
+from radtts.train import update_params, parse_data_from_batch
 
-from hifigan_models import Generator
-from hifigan_env import AttrDict
-from hifigan_denoiser import Denoiser
+from radtts.hifigan_models import Generator
+from radtts.hifigan_env import AttrDict
+from radtts.hifigan_denoiser import Denoiser
 from tqdm import tqdm
 
 
@@ -234,7 +234,7 @@ def infer(radtts_path, radtts_config_path, vocoder_path,
             break
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--radtts_path', type=str)
     parser.add_argument('-c', '--radtts_config_path', type=str, help='vocoder JSON file config')
@@ -279,3 +279,7 @@ if __name__ == "__main__":
               args.sigma_f0, args.sigma_energy, args.save_features,
               args.plot_features, args.f0_mean, args.f0_std, args.energy_mean,
               args.energy_std, args.filter_invalid)
+
+
+if __name__ == "__main__":
+    main()

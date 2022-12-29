@@ -1,5 +1,5 @@
 import re
-from .cmudict import CMUDict
+from radtts.tts_text_processing.cmudict import CMUDict
 
 _letter_to_arpabet = {
     'A': 'EY1',
@@ -34,6 +34,7 @@ _letter_to_arpabet = {
 # must ignore roman numerals
 # _acronym_re = re.compile(r'([A-Z][A-Z]+)s?|([A-Z]\.([A-Z]\.)+s?)')
 _acronym_re = re.compile(r'([A-Z][A-Z]+)s?')
+
 
 class AcronymNormalizer(object):
     def __init__(self, phoneme_dict):

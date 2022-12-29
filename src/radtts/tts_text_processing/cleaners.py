@@ -16,11 +16,11 @@ import re
 from string import punctuation
 from functools import reduce
 from unidecode import unidecode
-from .numerical import normalize_numbers, normalize_currency
-from .acronyms import AcronymNormalizer
-from .datestime import normalize_datestime
-from .letters_and_numbers import normalize_letters_and_numbers
-from .abbreviations import normalize_abbreviations
+from radtts.tts_text_processing.numerical import normalize_numbers, normalize_currency
+from radtts.tts_text_processing.acronyms import AcronymNormalizer
+from radtts.tts_text_processing.datestime import normalize_datestime
+from radtts.tts_text_processing.letters_and_numbers import normalize_letters_and_numbers
+from radtts.tts_text_processing.abbreviations import normalize_abbreviations
 
 
 # Regular expression matching whitespace:
@@ -29,12 +29,14 @@ _whitespace_re = re.compile(r'\s+')
 # Regular expression separating words enclosed in curly braces for cleaning
 _arpa_re = re.compile(r'{[^}]+}|\S+')
 
+
 def expand_abbreviations(text):
     return normalize_abbreviations(text)
 
 
 def expand_numbers(text):
     return normalize_numbers(text)
+
 
 def expand_currency(text):
     return normalize_currency(text)
@@ -81,7 +83,6 @@ class Cleaner(object):
         self.phonemedict = phonemedict
         self.acronym_normalizer = AcronymNormalizer(self.phonemedict)
 
-
     def __call__(self, text):
         for cleaner_name in self.cleaner_names:
             sequence_fns, word_fns = self.get_cleaner_fns(cleaner_name)
@@ -94,7 +95,6 @@ class Cleaner(object):
             text = ' '.join(text)
         text = remove_space_before_punctuation(text)
         return text
-
 
     def get_cleaner_fns(self, cleaner_name):
         if cleaner_name == 'basic_cleaners':

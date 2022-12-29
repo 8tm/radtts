@@ -27,17 +27,17 @@ from timeit import default_timer as timer
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torch.cuda import amp
-from radam import RAdam
-from loss import RADTTSLoss, AttentionBinarizationLoss
-from radtts import RADTTS
-from data import Data, DataCollate
-from plotting_utils import plot_alignment_to_numpy
-from common import update_params
+from radtts.radam import RAdam
+from radtts.loss import RADTTSLoss, AttentionBinarizationLoss
+from radtts.radtts import RADTTS
+from radtts.data import Data, DataCollate
+from radtts.plotting_utils import plot_alignment_to_numpy
+from radtts.common import update_params
 import numpy as np
-from distributed import (init_distributed, apply_gradient_allreduce,
+from radtts.distributed import (init_distributed, apply_gradient_allreduce,
                          reduce_tensor)
 from torch.utils.data.distributed import DistributedSampler
-from inference import load_vocoder
+from radtts.inference import load_vocoder
 
 
 def freeze(model):
@@ -455,7 +455,7 @@ def train(n_gpus, rank, output_directory, epochs, optim_algo, learning_rate,
             iteration += 1
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--config', type=str,
                         help='JSON file for configuration')
@@ -496,3 +496,7 @@ if __name__ == "__main__":
     torch.backends.cudnn.enabled = True
     torch.backends.cudnn.benchmark = False
     train(n_gpus, rank, **train_config)
+
+
+if __name__ == "__main__":
+    main()
